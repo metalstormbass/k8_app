@@ -8,10 +8,11 @@ metadata:
     tier: frontend
 spec:
   selector: 
+  selector: 
     matchLabels:
       app: juice-shop-app
       tier: frontend
-  replicas: 3
+  replicas: 4 
   strategy:
       type: RollingUpdate
       rollingUpdate:
@@ -45,4 +46,4 @@ spec:
   selector:
     app: juice-shop-app
     tier: frontend
-  type: LoadBalancer
+  type: ClusterIP
