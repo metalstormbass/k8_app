@@ -1,29 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: baddeployment
+  name: clumsybirddeployment
   labels:
-    app: badapp
+    app: clumsybird
     tier: frontend
 spec:
   selector: 
     matchLabels:
-      app: badapp
+      app: clumsybird
       tier: frontend
   replicas: 2 
-  strategy:
-      type: RollingUpdate
-      rollingUpdate:
-         maxUnavailable: 25%
-         maxSurge: 1
   template:
     metadata:
       labels: 
-        app: badapp
+        app: clumsybird
         tier: frontend
     spec:
       containers:
-      - image: michaelbraunbass/juice-shop@sha256:f1e2ae801f36b0c7623f473b3162ea8acf7137ebc2e9612a54b6d4dbcacaf7a1
+      - image: ghcr.io/metalstormbass/clumsybird/clumsybird@sha256:f4e89ecb8739c92f863fa263e799625d3bd32b77eb69f84904c95edb70434de5
         imagePullPolicy: Always
         name: vbadapp
         ports:
@@ -33,14 +28,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: badservice
+  name: clumsybirdservice
   labels:
-    app: badapp
+    app: clumsybird
 spec: 
   ports:
    - port: 80
      targetPort: 8080
   selector:
-    app: badapp
+    app: clumsybird
     tier: frontend
   type: LoadBalancer
